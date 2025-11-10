@@ -4,11 +4,21 @@ import { Sidebar } from "../Sidebar/Sidebar";
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const [collapsed, setCollapsed] = useState(false);
 
-  return (
-    <div className="flex flex-1 overflow-hidden">
-      <Sidebar collapsed={collapsed} toggle={() => setCollapsed(!collapsed)} />
+  const toggleSidebar = () => setCollapsed(!collapsed);
 
-      <main className="flex-1 overflow-y-auto p-6 bg-gray-50">{children}</main>
+  return (
+    <div className="flex h-screen overflow-hidden bg-gray-100">
+      {/* Sidebar */}
+      <Sidebar collapsed={collapsed} toggle={toggleSidebar} />
+
+      {/* Main Content */}
+      <main
+        className={`flex-1 overflow-y-auto transition-all duration-300
+          ${collapsed ? "md:ml-20" : "md:ml-25"} 
+          p-6`}
+      >
+        {children}
+      </main>
     </div>
   );
 };

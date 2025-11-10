@@ -1,14 +1,16 @@
 // src/components/PrivateRoute.tsx
 import React from "react";
 import { Navigate, Outlet } from "react-router-dom";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuth } from "../../context/AuthContext";
 
 type PrivateRouteProps = {
   redirectTo?: string;
 };
 
-const PrivateRoute: React.FC<PrivateRouteProps> = ({ redirectTo = "/login" }) => {
-  const {isAuthenticated} = useAuth();
+const PrivateRoute: React.FC<PrivateRouteProps> = ({
+  redirectTo = "/login",
+}) => {
+  const { isAuthenticated } = useAuth();
 
   if (!isAuthenticated) return <Navigate to={redirectTo} replace />;
 

@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { useAuth } from "../../hooks/useAuth";
+import { useState } from "react";
+import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
@@ -8,8 +8,6 @@ const LoginForm = () => {
   const [form, setForm] = useState({ email: "", password: "" });
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
@@ -17,9 +15,9 @@ const LoginForm = () => {
     try {
       await login(form.email, form.password);
       navigate("/products");
-    } catch (err:unknown) {
+    } catch (err: unknown) {
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      setError((err as any)?.response?.data?.message || (err as Error)?.message || "Login failed");
+      setError((err as any).message || "Login failed");
     } finally {
       setLoading(false);
     }
@@ -28,14 +26,6 @@ const LoginForm = () => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      if(!isAuthenticated) setIsAuthenticated(true);
-      navigate("/products");
-    }
-  }, []);
 
   return (
     <form

@@ -1,38 +1,61 @@
 // src/api/axios.ts
-import axios from "axios";
-import type { AxiosInstance } from "axios";
+import axios, { type AxiosInstance,type AxiosRequestConfig, AxiosError } from "axios";
+import AuthService from "../services/auth.service";
+import type { InternalAxiosRequestConfig } from "axios";
 
-const BASE_URL = import.meta.env.VITE_API_URL;
+
+const BASE_URL  = import.meta.env.VITE_API_URL;
 
 const api: AxiosInstance = axios.create({
   baseURL: BASE_URL,
-  withCredentials: false, // set to true if you use cookies
+  withCredentials: false, // change if you use cookies
+  headers: {
+    "Content-Type": "application/json",
+  },
 });
 
-// Helper to set/remove Authorization header
-export const setAuthToken = (token?: string | null) => {
+/**
+ * Request interceptor: attach access token when available
+ */
+api.interceptors.request.use((config: InternalAxiosRequestConfig) => {
+  const token = AuthService.getAccessToken();
+  console.log(BASE_URL)
+  
   if (token) {
-    api.defaults.headers.common["Authorization"] = `Bearer ${token}`;
-  } else {
-    delete api.defaults.headers.common["Authorization"];
+    config.headers = config.headers || {}; // ensure headers is always defined
+    config.headers.Authorization = `Bearer ${token}`;
   }
-};
 
-// A callback the app can register to run on 401 (unauthorized)
-let onUnauthorizedCallback: (() => void) | null = null;
-export const setOnUnauthorized = (cb: (() => void) | null) => {
-  onUnauthorizedCallback = cb;
-};
+  return config;
+});
 
-// Global response interceptor to catch 401s
+/**
+ * Response interceptor: on 401 attempt refresh once and retry
+ * Uses AuthService.refresh() which handles queuing.
+ */
 api.interceptors.response.use(
   (res) => res,
-  (error) => {
-    if (error?.response?.status === 401) {
-      // fire the callback if registered (e.g., to logout)
-      onUnauthorizedCallback?.();
+  async (err: AxiosError) => {
+    const originalRequest = err.config as AxiosRequestConfig & { _retry?: boolean };
+
+    if (err.response?.status === 401 && !originalRequest?._retry) {
+      originalRequest._retry = true;
+      try {
+        await AuthService.refresh(); // will throw if refresh fails
+        // after refresh, retry original request with new token
+        const token = AuthService.getAccessToken();
+        if (token && originalRequest.headers) {
+          originalRequest.headers.Authorization = `Bearer ${token}`;
+        }
+        return api(originalRequest);
+      } catch (refreshErr) {
+        // refresh failed -> ensure logout happens (AuthService handles cleanup)
+        AuthService.clearAuth(); // optional double-check
+        return Promise.reject(refreshErr);
+      }
     }
-    return Promise.reject(error);
+
+    return Promise.reject(err);
   }
 );
 

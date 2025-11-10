@@ -2,12 +2,10 @@ import LoginForm from "../components/forms/LoginForm"
 import Background from "../components/ui/Background"
 import Container from "../components/ui/Container"
 import logo from "../assets/images/logo2.jpg"
-import Nabvar from "../components/Navbar/Navbar"
 
 const LoginPage = () => {
   return (
     <>
-    <Nabvar/>
     <Background bgColor="bg-gray-600">
       <Container bgColor="bg-white/90">
         {/* FLEX WRAPPER */}

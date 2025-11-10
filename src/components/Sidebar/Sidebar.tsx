@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { MdMenu, MdPerson, MdKeyboardArrowRight } from "react-icons/md";
 
-import { useAuth } from "../../hooks/useAuth"; // adjust path if needed
+import { useAuth } from "../../context/AuthContext"; // adjust path if needed
 
 import sidebarItems from "../../data/MenuOptions/Sidebar";
 import footerOptions from "../../data/MenuOptions/SideB-Footer";
