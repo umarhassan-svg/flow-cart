@@ -5,7 +5,6 @@ import ProductCard from "../components/ProductCard/ProductCard";
 import type { Product } from "../types/productTypes";
 import Layout from "../components/layouts/layout-sidemenu";
 import { getProducts } from "../services/products.service";
-import Navbar from "../components/Navbar/Navbar";
 
 const ProductsListPage: React.FC = () => {
   const navigate = useNavigate();

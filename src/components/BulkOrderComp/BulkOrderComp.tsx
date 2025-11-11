@@ -72,13 +72,24 @@ const BulkOrderComp = () => {
         </div>
       ) : null}
 
-      <div className="flex gap-3">
+      <div className="flex gap-3 justify-center">
         <button
           onClick={handleAddToCart}
           disabled={!bulk}
-          className="px-3 py-2 bg-emerald-600 text-white rounded disabled:opacity-60"
+          className="px-3 py-2 bg-emerald-600 text-white rounded disabled:opacity-60 "
         >
           Add all to cart
+        </button>
+        {/* Clear Bulk Button */}
+        <button
+          onClick={() => {
+            setBulk(null);
+            setError(null);
+          }}
+          disabled={!bulk}
+          className="px-3 py-2 bg-red-600 text-white rounded disabled:opacity-60"
+        >
+          Remove bulk
         </button>
       </div>
     </div>

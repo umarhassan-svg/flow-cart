@@ -33,6 +33,14 @@ function App() {
               path="/checkout"
               element={<div>Checkout - Protected Route</div>}
             />
+            <Route
+              path="/profile"
+              element={<div>Profile - Protected Route</div>}
+            />
+            <Route
+              path="/settings"
+              element={<div>Settings - Protected Route</div>}
+            />
           </Route>
         </Route>
 

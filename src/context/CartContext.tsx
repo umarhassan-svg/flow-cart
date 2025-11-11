@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useReducer } from "react";
+import { createContext, useContext, useEffect, useReducer } from "react";
 import type { ReactNode } from "react";
 import type { OrderItem, BulkOrder } from "../types/orderTypes"; // adjust path if you store types in services
 
@@ -121,9 +121,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
           ? (JSON.parse(e.newValue) as State)
           : initialState;
         dispatch({ type: "SET", payload: next });
-      } catch {
-        // ignore
-      }
+      } catch {}
     };
     window.addEventListener("storage", handler);
     return () => window.removeEventListener("storage", handler);
@@ -170,6 +168,7 @@ export const CartProvider = ({ children }: { children: ReactNode }) => {
   );
 };
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useCart = (): CartContextType => {
   const ctx = useContext(CartContext);
   if (!ctx) throw new Error("useCart must be used within CartProvider");
