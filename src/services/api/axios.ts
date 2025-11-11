@@ -1,6 +1,6 @@
 // src/api/axios.ts
 import axios, { type AxiosInstance,type AxiosRequestConfig, AxiosError } from "axios";
-import AuthService from "../services/auth.service";
+import AuthService from "../auth.service";
 import type { InternalAxiosRequestConfig } from "axios";
 
 
@@ -58,5 +58,6 @@ api.interceptors.response.use(
     return Promise.reject(err);
   }
 );
+
 
 export default api;

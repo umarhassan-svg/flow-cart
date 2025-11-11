@@ -54,7 +54,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ collapsed, toggle }) => {
 
   return (
     <aside
-      className={`h-screen border-r bg-white flex flex-col transition-all duration-300 shadow-lg
+      className={`h-full border-r bg-white flex flex-col transition-all duration-300 shadow-lg
         ${collapsed ? "w-16" : "w-60"}`}
     >
       {/* Header */}

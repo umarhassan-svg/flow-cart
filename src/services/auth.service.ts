@@ -1,5 +1,5 @@
 // src/services/auth.service.ts
-import api from "../api/axios";
+import api from "./api/axios";
 
 type User = {
   id: string;

@@ -1,5 +1,5 @@
-customerName,productId,quantity,price
-Ali Khan,P001,3,1200
-Sara Malik,P004,1,800
-Hamza Ahmed,P003,2,1500
-Ayesha,P002,5,950
+customerId,productId,quantity,price
+CID-001,P001,3,1200
+CID-002,P004,1,800
+CID-003,P003,2,1500
+CID-004,P002,5,950
