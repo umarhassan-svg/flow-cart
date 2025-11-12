@@ -18,12 +18,13 @@ const CartComponent: React.FC = () => {
   }
 
   return (
-    <div className="h-4/6 flex flex-col">
+    <div className="h-5/6 flex flex-col">
       {/* header */}
       <div className="px-4 py-3 border-b">
         <div className="flex items-center justify-between">
-          <h3 className="text-lg font-medium text-gray-800">Cart</h3>
-          <div className="text-sm text-gray-600">Items: {count}</div>
+          <div className="text-lg font-medium text-gray-800">
+            Items: {count}
+          </div>
         </div>
       </div>
 
