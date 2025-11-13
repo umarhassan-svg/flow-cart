@@ -76,6 +76,16 @@ const DashBoard: React.FC = () => {
   return (
     <>
       <Layout>
+        <div className="flex items-center justify-between mb-6">
+          <div>
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-800">
+              Dashboard
+            </h1>
+            <p className="text-sm text-gray-500">
+              View a summary of your store&apos;s performance
+            </p>
+          </div>
+        </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 px-4 md:px-6 py-6">
           {KPIList.map((item) => (
             <div
