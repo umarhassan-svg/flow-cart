@@ -5,7 +5,11 @@ import Navbar from "../Navbar/Navbar";
 import { useCart } from "../../context/CartContext";
 import CartComponent from "../Cart/Cart";
 
-const Layout = ({ children }: { children: React.ReactNode }) => {
+const Layout: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const [collapsed, setCollapsed] = useState(false); // desktop collapse
   const [isCartOpen, setIsCartOpen] = useState(false);
 
@@ -27,7 +31,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
         <div
           className={`hidden md:flex ${
             collapsed ? "w-16" : "w-60"
-          } transition-all`}
+          } transition-all `}
         >
           <Sidebar
             collapsed={collapsed}
@@ -43,7 +47,10 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 
       {/* Cart overlay */}
       {isCartOpen && (
-        <div onClick={toggleCart} className="fixed inset-0 z-40 bg-black/40" />
+        <div
+          onClick={toggleCart}
+          className="tooltip fixed inset-0 z-40 bg-black/40"
+        />
       )}
 
       {/* Cart drawer */}
@@ -57,7 +64,7 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
           <h3 className="text-lg font-semibold">Cart</h3>
           <button
             onClick={toggleCart}
-            className="text-gray-500 hover:text-black text-xl"
+            className="text-gray-500 hover:text-black text-xl tooltip"
           >
             ×
           </button>

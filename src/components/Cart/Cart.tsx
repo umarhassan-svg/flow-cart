@@ -71,7 +71,7 @@ const CartComponent: React.FC = () => {
 
                 <button
                   onClick={() => removeItem(it.productId)}
-                  className="text-xs text-red-600 px-2 py-1 rounded hover:bg-red-50"
+                  className="tooltip text-xs text-red-600 px-2 py-1 rounded hover:bg-red-50"
                 >
                   Remove
                 </button>
@@ -94,13 +94,13 @@ const CartComponent: React.FC = () => {
           <div className="flex items-center gap-2">
             <button
               onClick={() => clear()}
-              className="px-3 py-2 border rounded text-sm"
+              className="tooltip px-3 py-2 border rounded text-sm"
             >
               Clear
             </button>
             <button
               onClick={() => alert("Checkout — implement server flow")}
-              className="px-4 py-2 bg-blue-600 text-white rounded text-sm"
+              className="tooltip px-4 py-2 bg-blue-600 text-white rounded text-sm"
             >
               Checkout
             </button>

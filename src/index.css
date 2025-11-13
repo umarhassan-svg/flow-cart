@@ -1,1 +1,6 @@
 @import "tailwindcss";
+
+/* Simple reusable tooltip */
+.tooltip {
+    cursor: pointer;
+}

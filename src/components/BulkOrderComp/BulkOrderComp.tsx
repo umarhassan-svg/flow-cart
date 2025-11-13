@@ -8,7 +8,7 @@ import { useCart } from "../../context/CartContext";
 import { makeBulk } from "../../utils/makeBulk";
 import { useNavigate } from "react-router-dom";
 
-const BulkOrderComp = () => {
+const BulkOrderComp: React.FC = () => {
   const navigate = useNavigate();
   const { parseFile } = useParseCSV();
   const { addBulkOrder } = useCart();
@@ -76,7 +76,7 @@ const BulkOrderComp = () => {
         <button
           onClick={handleAddToCart}
           disabled={!bulk}
-          className="px-3 py-2 bg-emerald-600 text-white rounded disabled:opacity-60 "
+          className="tooltip px-3 py-2 bg-emerald-600 text-white rounded disabled:opacity-60 "
         >
           Add all to cart
         </button>
@@ -87,7 +87,7 @@ const BulkOrderComp = () => {
             setError(null);
           }}
           disabled={!bulk}
-          className="px-3 py-2 bg-red-600 text-white rounded disabled:opacity-60"
+          className="tooltip px-3 py-2 bg-red-600 text-white rounded disabled:opacity-60"
         >
           Remove bulk
         </button>

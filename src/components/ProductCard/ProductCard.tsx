@@ -17,9 +17,12 @@ const ProductCard: React.FC<Props> = ({
   const navigate = useNavigate();
 
   return (
-    <article className="bg-white border rounded-lg shadow-sm overflow-hidden flex flex-col">
+    <article
+      className="tooltip bg-white border rounded-lg shadow-sm overflow-hidden flex flex-col"
+      data-tooltip={`Click to open ${product.name}`}
+      onClick={() => navigate(`/products/${product.id}`)}
+    >
       <button
-        onClick={() => navigate(`/products/${product.id}`)}
         className="block w-full h-44 md:h-40 lg:h-48 overflow-hidden bg-gray-50"
         aria-label={`Open ${product.name}`}
       >
@@ -65,7 +68,7 @@ const ProductCard: React.FC<Props> = ({
             <button
               onClick={() => onAdd?.(product)}
               disabled={product.stock === 0}
-              className={`ml-2 inline-flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium transition
+              className={`tooltip ml-2 inline-flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium transition
                 ${
                   product.stock === 0
                     ? "bg-gray-200 text-gray-400 cursor-not-allowed"

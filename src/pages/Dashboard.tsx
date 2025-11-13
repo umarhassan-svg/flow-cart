@@ -26,8 +26,9 @@ import {
 } from "recharts";
 
 const fmtCurrency = (v: number) => `$ ${v.toLocaleString()}`;
+import React from "react";
 
-const DashBoard = () => {
+const DashBoard: React.FC = () => {
   // Key metrics
   const { totalRevenue, totalOrders, avgOrderValue, activeCustomers } = KPIS;
   const KPIList = [
@@ -75,11 +76,11 @@ const DashBoard = () => {
   return (
     <>
       <Layout>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 p-4 justify-items-center">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 px-4 md:px-6 py-6">
           {KPIList.map((item) => (
             <div
               key={item.label}
-              className="transition-transform transform hover:-translate-y-1"
+              className="w-full transition-transform transform hover:-translate-y-1 hover:shadow-md rounded-xl"
             >
               <StatCard
                 label={item.label}

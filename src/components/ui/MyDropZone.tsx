@@ -7,7 +7,7 @@ type Props = {
   fileExtensions: string[]; // Example: ['.csv', '.pdf']
 };
 
-const MyDropzone = ({ onUpload, fileExtensions }: Props) => {
+const MyDropzone: React.FC<Props> = ({ onUpload, fileExtensions }: Props) => {
   const [isDragActive, setIsDragActive] = useState(false);
   const [toast, setToast] = useState<{
     msg: string;

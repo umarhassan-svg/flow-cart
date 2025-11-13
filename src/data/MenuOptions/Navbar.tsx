@@ -1,8 +1,3 @@
-const navItems = [
-  { label: "Home", path: "/" },
-  { label: "Products", path: "/products" },
-  { label: "Login", path: "/login" },
-];
-
+const navItems: { label: string; path: string }[] = [];
 
 export default navItems;

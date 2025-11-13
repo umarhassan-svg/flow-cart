@@ -27,7 +27,7 @@ const Sidebar: React.FC<Props> = ({ collapsed }) => {
             <li key={it.path}>
               <button
                 onClick={() => navigate(it.path)}
-                className={`flex items-center gap-3 w-full px-3 py-2 rounded-md text-sm transition ${
+                className={`tooltip flex items-center gap-3 w-full px-3 py-2 rounded-md text-sm transition ${
                   isActive(it.path)
                     ? "bg-blue-50 text-blue-600 font-semibold border-r-4 border-blue-600"
                     : "text-gray-700 hover:bg-gray-50 hover:text-blue-600"

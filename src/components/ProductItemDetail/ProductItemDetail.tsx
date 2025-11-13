@@ -1,18 +1,18 @@
 import React from "react";
-import type { OrderItem } from "../../types/orderTypes";
+import type { Product } from "../../types/productTypes";
 
-const ShowOrderItem: React.FC<{ item: OrderItem }> = ({
+const ProductDetailItem: React.FC<{ item: Product }> = ({
   item,
 }: {
-  item: OrderItem;
+  item: Product;
 }) => {
   return (
     <div className="flex justify-between bg-white border rounded-md shadow-sm px-4 py-2 text-sm text-gray-700">
       <span>
-        Product ID: <strong>{item.productId}</strong>
+        Product ID: <strong>{item.id}</strong>
       </span>
       <span>
-        Qty: <strong>{item.quantity}</strong>
+        Qty: <strong>{item.stock}</strong>
       </span>
       {item.price && (
         <span>
@@ -23,4 +23,4 @@ const ShowOrderItem: React.FC<{ item: OrderItem }> = ({
   );
 };
 
-export default ShowOrderItem;
+export default ProductDetailItem;

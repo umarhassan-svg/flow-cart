@@ -21,8 +21,8 @@ const OrdersListPage: React.FC = () => {
           </p>
         </header>
 
-        <div className="overflow-x-auto">
-          <table className="min-w-full border border-gray-200 bg-white rounded-lg shadow-sm">
+        <div className="overflow-hidden rounded-lg border shadow-sm">
+          <table className="min-w-full bg-white">
             <thead className="bg-gray-50">
               <tr className="text-left text-gray-700 text-sm font-medium">
                 <th className="px-4 py-2 border-b">Order ID</th>
@@ -70,7 +70,8 @@ const OrdersListPage: React.FC = () => {
                       <td className="px-4 py-2 border-b text-center">
                         <button
                           onClick={() => toggleOrder(order.id)}
-                          className="text-blue-600 hover:underline text-sm font-medium"
+                          className="tooltip bg-blue-400 text-white text-sm font-medium px-3 py-1.5 rounded-full hover:bg-blue-700 transition"
+                          data-tooltip="View order details"
                         >
                           {expandedOrderId === order.id ? "Hide" : "Show"} Items
                         </button>

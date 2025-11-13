@@ -59,7 +59,7 @@ const ProductsListPage: React.FC = () => {
             <div className="flex items-center gap-3">
               <button
                 onClick={() => navigate("/bulk-orders")}
-                className="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-md shadow-sm text-sm"
+                className="tooltip bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-md shadow-sm text-sm"
               >
                 Bulk Orders
               </button>

@@ -63,41 +63,40 @@ const Navbar: React.FC<Props> = ({
 
   return (
     <nav className="bg-white border-b shadow-sm relative">
-      <div className="max-w-6xl mx-auto px-4 md:px-6 h-14 flex items-center justify-between">
+      <div className="max-w-none px-4 h-14 flex items-center justify-between">
         {/* left: logo + mobile burger */}
         <div className="flex items-center gap-3">
           <button
-            className="md:hidden p-2"
+            className="md:hidden p-2 tooltip"
             onClick={() => setOpen((s) => !s)}
             aria-label="Open menu"
           >
             {open ? "✕" : "☰"}
           </button>
-
-          <div
-            className="text-lg font-semibold text-blue-600 cursor-pointer"
-            onClick={() => navigate("/")}
-          >
-            FlowCart
-          </div>
-
           {/* desktop: sidebar toggle */}
           <button
             onClick={onToggleSidebar}
-            className="hidden md:inline-flex items-center justify-center p-2 rounded hover:bg-gray-100"
-            title="Toggle sidebar"
+            className="tooltip hidden md:inline-flex items-center justify-center p-2 rounded hover:bg-gray-100"
+            title="Toggle sidebar tooltip"
           >
             ☰
           </button>
+
+          <div
+            className="text-lg font-semibold text-blue-600 cursor-pointer"
+            onClick={() => navigate("/Home")}
+          >
+            FlowCart
+          </div>
         </div>
 
         {/* center: desktop nav */}
-        <ul className="hidden md:flex items-center space-x-4">
+        <ul className="hidden md:flex items-center space-x-4 ">
           {navItems.map((it) => (
             <li key={it.path}>
               <button
                 onClick={() => navigate(it.path)}
-                className={`px-2 py-1 rounded text-sm ${
+                className={`tooltip px-2 py-1 rounded text-sm ${
                   isActive(it.path)
                     ? "text-blue-600 border-b-2 border-blue-600"
                     : "text-gray-700 hover:text-blue-600"
@@ -113,7 +112,7 @@ const Navbar: React.FC<Props> = ({
         <div className="flex items-center gap-3">
           <button
             onClick={onToggleCart}
-            className="relative p-2 rounded hover:bg-gray-100"
+            className="tooltip relative p-2 rounded hover:bg-gray-100"
             aria-label="Open cart"
           >
             <svg
@@ -145,7 +144,7 @@ const Navbar: React.FC<Props> = ({
             >
               <button
                 onClick={() => setProfileOpen((s) => !s)}
-                className="flex items-center gap-2 px-3 py-1 rounded hover:bg-gray-100"
+                className="tooltip flex items-center gap-2 px-3 py-1 rounded hover:bg-gray-100"
                 aria-expanded={profileOpen}
                 aria-haspopup="true"
               >
@@ -162,7 +161,7 @@ const Navbar: React.FC<Props> = ({
                       <li key={opt.label}>
                         <button
                           onClick={() => handleProfileAction(opt)}
-                          className="w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                          className="tooltip w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-200"
                         >
                           {opt.label}
                         </button>

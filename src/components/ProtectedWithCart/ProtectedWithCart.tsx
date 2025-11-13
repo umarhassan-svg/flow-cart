@@ -1,4 +1,3 @@
-// src/components/ProtectedWithCart.tsx
 import React from "react";
 import { Outlet } from "react-router-dom";
 import { CartProvider } from "../../context/CartContext";
