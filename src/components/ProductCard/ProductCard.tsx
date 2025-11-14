@@ -4,6 +4,7 @@ import type { Product } from "../../types/productTypes";
 import { useNavigate } from "react-router-dom";
 
 type Props = {
+  e: React.MouseEvent;
   product: Product;
   onAdd?: (product: Product) => void; // optional handler for add-to-cart
   showAddBtn?: boolean;
@@ -66,7 +67,7 @@ const ProductCard: React.FC<Props> = ({
 
           {showAddBtn && (
             <button
-              onClick={() => onAdd?.(product)}
+              onClick={(e) => onAdd(e)}
               disabled={product.stock === 0}
               className={`tooltip ml-2 inline-flex items-center gap-2 px-3 py-1.5 rounded-md text-sm font-medium transition
                 ${

@@ -2,9 +2,20 @@
 import React from "react";
 import Layout from "../components/layouts/layout-sidemenu";
 import BulkOrderComp from "../components/BulkOrderComp/BulkOrderComp";
+import { FaArrowLeft } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 const BulkOrderPage: React.FC = () => {
+  const navigate = useNavigate();
   return (
     <Layout>
+      {/* Back Button */}
+      <div
+        className="flex items-center gap-2 text-gray-600 hover:text-indigo-600 cursor-pointer"
+        onClick={() => navigate(-1)}
+      >
+        <FaArrowLeft />
+        <span className="text-sm font-medium">Back</span>
+      </div>
       <div className="flex justify-center w-full py-8">
         {/* Container to keep both sections centered */}
         <div className="grid grid-cols-1 md:grid-cols-1  w-full max-w-4xl">

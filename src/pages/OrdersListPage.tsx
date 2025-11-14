@@ -24,7 +24,7 @@ const STATUS = {
 const PAGE_SIZE = 8;
 
 const StatusPill: React.FC<{ status: string }> = ({ status }) => {
-  const cls = (STATUS as any)[status] ?? STATUS.default;
+  const cls = (STATUS as Record<string, string>)[status] ?? STATUS.default;
   return (
     <span
       className={`inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold ${cls}`}
@@ -93,7 +93,7 @@ const OrdersListPage: React.FC = () => {
         </header>
 
         <div className="mb-4 grid grid-cols-1 gap-3 sm:grid-cols-3">
-          <div className="sm:col-span-2 flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm">
+          <div className="sm:col-span-2 flex items-center gap-3 bg-white p-3 rounded-xl shadow-sm border-gray-300 border">
             <FaSearch className="w-4 h-4 text-gray-400" />
             <input
               value={q}
@@ -110,9 +110,9 @@ const OrdersListPage: React.FC = () => {
                 setStatus(e.target.value);
                 setPage(1);
               }}
-              className="rounded-full border px-3 py-1 text-sm bg-white"
+              className="tooltip rounded-full border px-3 py-1 text-sm bg-white border-gray-300 text-gray-700 outline-none"
             >
-              <option value="all">All</option>
+              <option value=" all">All</option>
               <option value="processing">Processing</option>
               <option value="completed">Completed</option>
               <option value="cancelled">Cancelled</option>
@@ -158,7 +158,7 @@ const OrdersListPage: React.FC = () => {
                         </div>
                       </td>
                       <td className="px-6 py-4">
-                        <StatusPill status={o.status} />
+                        <StatusPill status={o.status ?? "default"} />
                       </td>
                       <td className="px-6 py-4 font-medium text-gray-800">
                         {o.totalQty}
@@ -167,12 +167,12 @@ const OrdersListPage: React.FC = () => {
                         <div className="inline-flex items-center gap-2">
                           <button
                             onClick={() => toggle(o.id)}
-                            className="inline-flex items-center gap-2 rounded-full bg-indigo-50 text-indigo-700 px-3 py-1 text-sm"
+                            className="tooltip inline-flex items-center gap-2 rounded-full bg-indigo-50 text-indigo-700 px-3 py-1 text-sm"
                           >
                             <FaEye className="w-4 h-4" />{" "}
                             {expanded === o.id ? "Hide" : "Show"} Items
                           </button>
-                          <button className="rounded-full p-2 hover:bg-gray-100">
+                          <button className="tooltip rounded-full p-2 hover:bg-gray-100">
                             <FaEllipsisH className="w-4 h-4 text-gray-500" />
                           </button>
                         </div>
@@ -224,7 +224,9 @@ const OrdersListPage: React.FC = () => {
                   <div className="flex items-center gap-2">
                     <div
                       className={`text-xs px-2 py-1 rounded-full ${
-                        (STATUS as any)[o.status] ?? STATUS.default
+                        (STATUS as Record<string, string>)[
+                          o.status as keyof typeof STATUS
+                        ] ?? STATUS.default
                       }`}
                     >
                       {o.status}
@@ -272,14 +274,14 @@ const OrdersListPage: React.FC = () => {
             <button
               onClick={() => setPage((p) => Math.max(1, p - 1))}
               disabled={page === 1}
-              className="px-3 py-1 rounded-full border disabled:opacity-50"
+              className="px-3 py-1 rounded-full border disabled:opacity-50 tooltip"
             >
               Prev
             </button>
             <button
               onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
               disabled={page === totalPages}
-              className="px-3 py-1 rounded-full border disabled:opacity-50"
+              className="px-3 py-1 rounded-full border disabled:opacity-50 tooltip"
             >
               Next
             </button>

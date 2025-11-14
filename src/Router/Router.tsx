@@ -12,6 +12,7 @@ import ProductsListPage from "../pages/ProductsListPage";
 import BulkOrderPage from "../pages/BulkOrderPage";
 import OrdersListPage from "../pages/OrdersListPage";
 import ProductsDetailPage from "../pages/ProductsDetailPage";
+import CheckoutPage from "../pages/CheckOutPage";
 
 const router = createBrowserRouter([
   // --- Public routes ---
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
       {
         path: "/products/:id",
         element: <ProductsDetailPage />,
+      },
+      {
+        path: "/checkout",
+        element: <CheckoutPage />,
       },
     ],
   },

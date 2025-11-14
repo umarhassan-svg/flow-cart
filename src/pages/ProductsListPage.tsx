@@ -5,12 +5,14 @@ import ProductCard from "../components/ProductCard/ProductCard";
 import type { Product } from "../types/productTypes";
 import Layout from "../components/layouts/layout-sidemenu";
 import { getProducts } from "../services/products.service";
+import { useCart } from "../context/CartContext";
 
 const ProductsListPage: React.FC = () => {
   const navigate = useNavigate();
   const [products, setProducts] = useState<Product[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { items, addItem } = useCart();
 
   useEffect(() => {
     let mounted = true;
@@ -37,8 +39,24 @@ const ProductsListPage: React.FC = () => {
     };
   }, []);
 
-  const handleAdd = (p: Product) => {
-    console.log("Add to cart:", p);
+  const handleAdd = (e: React.MouseEvent, p: Product) => {
+    e.stopPropagation();
+
+    const existing = items.find((x) => x.productId === p.id);
+    const currentQty = existing ? existing.quantity : 0;
+
+    if (currentQty + 1 > p.stock) {
+      alert(`Only ${p.stock} items available in stock.`);
+      return;
+    }
+
+    addItem({
+      productId: p.id,
+      name: p.name,
+      quantity: 1,
+      price: p.price,
+      imageUrl: p.imageUrl,
+    });
   };
 
   return (
@@ -80,7 +98,11 @@ const ProductsListPage: React.FC = () => {
 
           <section className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {products.map((p) => (
-              <ProductCard key={p.id} product={p} onAdd={handleAdd} />
+              <ProductCard
+                key={p.id}
+                product={p}
+                onAdd={(e) => handleAdd(e, p)}
+              />
             ))}
           </section>
         </div>

@@ -1,10 +1,18 @@
 import React from "react";
 import { useCart } from "../../context/CartContext";
+import { useNavigate } from "react-router-dom";
+import { FaTrash } from "react-icons/fa";
 
 const fmt = (v = 0) => Number(v).toFixed(2);
 
 const CartComponent: React.FC = () => {
   const { items, count, total, updateQty, removeItem, clear } = useCart();
+  const navigate = useNavigate();
+
+  const initiateCheckout = () => {
+    // TODO
+    navigate("/checkout");
+  };
 
   if (!items || items.length === 0) {
     return (
@@ -71,9 +79,10 @@ const CartComponent: React.FC = () => {
 
                 <button
                   onClick={() => removeItem(it.productId)}
-                  className="tooltip text-xs text-red-600 px-2 py-1 rounded hover:bg-red-50"
+                  title="Remove"
+                  className="tooltip ml-2 inline-flex items-center justify-center w-8 h-8 rounded-full bg-white border text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-200"
                 >
-                  Remove
+                  <FaTrash className="w-3.5 h-3.5" />
                 </button>
               </div>
             </div>
@@ -99,7 +108,7 @@ const CartComponent: React.FC = () => {
               Clear
             </button>
             <button
-              onClick={() => alert("Checkout — implement server flow")}
+              onClick={() => initiateCheckout()}
               className="tooltip px-4 py-2 bg-blue-600 text-white rounded text-sm"
             >
               Checkout

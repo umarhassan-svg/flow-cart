@@ -105,7 +105,7 @@ const LoginForm: React.FC = () => {
       <button
         type="submit"
         disabled={loading}
-        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition-all disabled:opacity-60"
+        className="tooltip w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-lg transition-all disabled:opacity-60"
       >
         {loading ? "Signing in..." : "Login"}
       </button>

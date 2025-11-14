@@ -3,6 +3,8 @@ import { useParams, useNavigate } from "react-router-dom";
 import Layout from "../components/layouts/layout-sidemenu";
 import { getProductById } from "../services/products.service";
 import type { Product } from "../types/productTypes";
+import { useCart } from "../context/CartContext";
+import { FaArrowLeft } from "react-icons/fa";
 
 const ProductsDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -11,6 +13,7 @@ const ProductsDetailPage: React.FC = () => {
   const [product, setProduct] = useState<Product | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const { addItem } = useCart();
 
   useEffect(() => {
     if (!id) return;
@@ -22,6 +25,18 @@ const ProductsDetailPage: React.FC = () => {
       .catch((err) => setError(err.message || "Failed to fetch product"))
       .finally(() => setLoading(false));
   }, [id]);
+
+  const handleAddToCart = (p: Product) => {
+    console.log("Add to cart:", p);
+    const orderitem = {
+      productId: p.id,
+      name: p.name,
+      quantity: 1,
+      price: p.price,
+      imageUrl: p.imageUrl,
+    };
+    addItem(orderitem);
+  };
 
   if (loading)
     return (
@@ -54,15 +69,13 @@ const ProductsDetailPage: React.FC = () => {
     <Layout>
       <div className="max-w-5xl mx-auto p-6 lg:p-8">
         {/* Back Button */}
-        <button
+        <div
+          className="flex items-center gap-2 text-gray-600 hover:text-indigo-600 cursor-pointer mb-6"
           onClick={() => navigate(-1)}
-          className="tooltip mb-6 inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium
-             bg-blue-50 text-blue-600 hover:bg-blue-100 hover:text-blue-700
-             transition-all duration-200 shadow-sm"
         >
-          <span className="text-base">←</span>
-          Back to Products
-        </button>
+          <FaArrowLeft />
+          <span className="text-sm font-medium">Back</span>
+        </div>
 
         {/* Product Detail Card */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 bg-white rounded-2xl shadow-lg border border-gray-100 p-6 md:p-8">
@@ -112,6 +125,7 @@ const ProductsDetailPage: React.FC = () => {
                     ? "bg-gray-200 cursor-not-allowed"
                     : "bg-blue-600 hover:bg-blue-700"
                 }`}
+                onClick={() => handleAddToCart(product)}
               >
                 Add to Cart
               </button>
